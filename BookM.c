@@ -1,4 +1,4 @@
-                         //BOOK MANAGEMENT SYSTEM
+                                                          //BOOK MANAGEMENT SYSTEM
 
 //Header Files
 #include<stdio.h>
@@ -8,14 +8,14 @@
 
 //Function Declarations
 void del(FILE *fp);                  //delete a record from database
-void list(FILE *fp);                //display all the existing record
+void list(FILE *fp);                 //display all the existing record
 void modify(FILE *fp);               //update record of database
 void insert(FILE *fp);               //add a new record in database
 void display(FILE *fp);              //display a particular record
 void booksold(FILE *fp);             //decrease the number of available books
 
 
-int verify();                          // for login
+int verify();                        // for login
 int search(FILE *fp, char *name);    //search for a particular record
 
 
@@ -60,13 +60,13 @@ int main()
 
         // Menu
 
-        printf("\n\t\t\t1>> Insert a new record\n");
-        printf("\t\t\t2>> Delete a record\n");
-        printf("\t\t\t3>> Display records of the book\n");
-        printf("\t\t\t4>> Modify an existing record\n");
-        printf("\t\t\t5>> List all records\n");
-        printf("\t\t\t6>> Book Sold\n");
-        printf("\t\t\t7>> Exit\n");
+        printf("\n\t\t\t1. Insert a new record\n");
+        printf("\t\t\t2. Delete a record\n");
+        printf("\t\t\t3. Display record of the particular book\n");
+        printf("\t\t\t4. Update an existing record\n");
+        printf("\t\t\t5. List all records\n");
+        printf("\t\t\t6. Book Sold\n");
+        printf("\t\t\t7. Exit\n");
 
         printf("\n\t\t\tEnter your choice : ");
         scanf("%d", &choice);
@@ -104,7 +104,7 @@ int main()
             printf("\t\t\t\t\t ********** HAVE A NICE DAY **********\n\n\n");
             exit(1);
         default:
-            goto label;           //For reenter the name of the book
+            goto label;           //For re-enter the name of the book
         }
     }
     return 0;
@@ -255,6 +255,7 @@ void del(FILE *fp)
 void modify(FILE *fp)
 {
     char name[50];
+    int ch;
     long size = sizeof(book);
 
     system("CLS");
@@ -270,11 +271,12 @@ void modify(FILE *fp)
          printf("\n\t\t\tEnter new data-->\n\n");
 
 
-    printf("\n\t\t\tEnter numbers of copies : ");
-    scanf("%d", &book.ncopies);
 
-    printf("\n\t\t\tEnter cost of book \t: ");
-    scanf("%f", &book.cost);
+             printf("\n\t\t\tEnter numbers of copies : ");
+             scanf("%d", &book.ncopies);
+             printf("\n\t\t\tEnter cost of book \t: ");
+             scanf("%f", &book.cost);
+
 
     fseek(fp, -size, 1);
 
@@ -327,15 +329,15 @@ void display(FILE *fp)
     fflush(stdin);
     gets(name);
 
-    printf("\n\n\n\t\t\t\t\t\t----------------------------------");
+    printf("\n\n\n\t\t\t\t\t\t------------------------------------");
     if(search(fp, name) == 1)
     {
         printf("\n\n\t\t\t\t\t\t     Name    : \t%s\n", book.name);
         printf("\t\t\t\t\t\t     Copies  : \t%d\n", book.ncopies);
-        printf("\t\t\t\t\t\t     Cost    : \t%f\n\n", book.cost);
+        printf("\t\t\t\t\t\t     Cost    : \t%f INR\n\n", book.cost);
     }
 
-    printf("\t\t\t\t\t\t----------------------------------\n\n");
+    printf("\t\t\t\t\t\t------------------------------------\n\n");
 }
 
 int search(FILE *fp,char *name)
@@ -367,18 +369,18 @@ void list(FILE *fp)
 
     printf("\t\t\t\t\t ********** BOOK MANAGEMENT SYSTEM ********** \n\n\n\n\n");
 
-    printf("\t\t\t\t\t -------------------------------------------");
+    printf("\t\t\t\t\t ---------------------------------------------");
 
     printf("\n\n\t\t\t\t\t NAME\t\tCOPIES\t\tCOST\n\n");
 
-    printf("\t\t\t\t\t -------------------------------------------\n");
+    printf("\t\t\t\t\t ---------------------------------------------\n");
 
     rewind(fp);
 
     if(fread(&book, sizeof(book), 1, fp)==0)
     {
         printf("\n\a\t\t\t\t\t\t\t NO RECORDS!\n");
-        printf("\n\t\t\t\t\t -------------------------------------------");
+        printf("\n\t\t\t\t\t ----------------------------------------------");
         printf("\n\n\n\n\n");
         return;
     }
@@ -387,12 +389,12 @@ void list(FILE *fp)
     {
         printf("\n\t\t\t\t\t %s\t", book.name);
         printf("\t%d\t\t", book.ncopies);
-        printf("%f\n", book.cost);
+        printf("%f INR\n", book.cost);
 
     }while(fread(&book, sizeof(book), 1, fp)==1);
 
     printf("\n");
-    printf("\t\t\t\t\t -------------------------------------------");
+    printf("\t\t\t\t\t ---------------------------------------------");
     printf("\n\n");
 }
 
